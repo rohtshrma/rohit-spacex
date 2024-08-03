@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Sidebar from './components/Sidebar';
+import Dashboard from './pages/Dashboard';
+import Rockets from './pages/Rockets';
 
 function App() {
+  const appContainerStyle = {
+    display: 'flex',
+    height: '100vh', // Ensure full height of the viewport
+  };
+
+  const contentContainerStyle = {
+    flex: 1, // Take up the remaining space after the sidebar
+    // overflowY: 'auto', // Allow scrolling if content exceeds viewport height
+    padding: '20px',
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div style={appContainerStyle}>
+        <Sidebar />
+        <div style={contentContainerStyle}>
+          <Routes>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/rockets" element={<Rockets />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
 }
 
